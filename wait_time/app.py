@@ -24,13 +24,29 @@ def get_attendee_info(db, attendee_id):
     cur.close()
     return attendee
 
+def get_current_wait_time_seconds(db, attendee_id):
+    wait_time = 200
+    SQL = """
+    select current_estimated_wait_time_seconds
+    from attendees as a
+    where a.id = %s
+    """
+    cur = db.cursor(dictionary=True)
+    cur.execute(SQL, (attendee_id, ))
+    attendee = cur.fetchone()
+    if attendee:
+        if attendee["current_estimated_wait_time_seconds"] is not None:
+            wait_time = attendee["current_estimated_wait_time_seconds"]
+    cur.close()
+    return wait_time
+
 def lambda_handler(event, context):
     body = event
     attendee_id = body["attendee_id"]
     db = get_db_connection(read_only=False)
-    info = get_attendee_info(db, attendee_id)
+    wait_time = get_current_wait_time_seconds(db, attendee_id)
     db.close()
-    print(info)
-    print(attendee_id)
-    return {"wait_time": 200}
+    # print(info)
+    # print(attendee_id)
+    return {"wait_time": wait_time}
     
