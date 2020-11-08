@@ -9,6 +9,11 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+    Environment:
+      Variables:
+        MYSQL_HOST: ${env:MYSQL_HOST, 'changeme'}
+        MYSQL_USER: ${env:MYSQL_USER, 'changeme'}
+        MYSQL_PASSWD: ${env:MYSQL_PASSWD, 'changeme'}
 
 Resources:
   WaitTimeFunction:

@@ -43,12 +43,14 @@ CREATE TABLE `attendees` (
   `office_hours_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `lobby_join` datetime DEFAULT NULL,
+  `current_position` int(11) DEFAULT NULL,
+  `current_estimated_wait_time_seconds` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_office_hours_id` (`office_hours_id`),
   KEY `fk_user_id` (`user_id`),
   CONSTRAINT `fk_office_hours_id` FOREIGN KEY (`office_hours_id`) REFERENCES `office_hours` (`id`),
   CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `attendee_queue_positions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
