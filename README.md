@@ -4,6 +4,13 @@
 Make sure you have python3 and sam installed
 
 
+Set your local environment varibles in your terminal session:
+```
+export MYSQL_USER=<dbusername>
+export MYSQL_PASSWD=<dbpassword>
+export MYSQL_HOST=<dbhostname>
+```
+
 To ensure everything is setup correctly:
 ```
 sam validate
